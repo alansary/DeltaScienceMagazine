@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ new.title|title }}{% endblock %}
+{% block navbar %}
+	<li><a href='/'>Home</a></li>
+	<li><a href="/department/departments/">Departments</a></li>
+	<li class="active"><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	{% if user.is_authenticated %}
+		<li><a href="/accounts/logout/">Logout</a></li>
+	{% else %}
+		<li><a href="/accounts/login/">Login</a></li>
+		<li><a href="/accounts/register_user/">Register</a></li>
+	{% endif %}
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}
+	<div class="container-fluid col-md-10 col-md-offset-1">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h2 class="text-default">{{ new.title|title }}</h2>
+				<p class="text-default">Latest News | {{new.pub_date}}</p>
+			</div>
+			<div class="panel-body">
+				{% if new.thumbnail %}
+					<p><img src="{% get_static_prefix %}{{new.get_thumbnail}}" style="width:100%;height:100%;" class="thumbnail"/></p>
+				{% endif %}
+				<p class="text-left text-default lead">{{ new.description }}</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}

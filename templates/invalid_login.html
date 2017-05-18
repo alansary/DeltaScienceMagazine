@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Invalid Login{% endblock %}
+{% block navbar %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/department/departments/">Departments</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	<li><a href="/accounts/login/">Login</a></li>
+	<li><a href="/accounts/register_user/">Register</a></li>
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block page_header %}
+	<div class="container-fluid">
+		<div class="page-header text-muted">
+			<h1 class="text-center">Invalid username or password! Click <a href="/accounts/login/">here</a> to try again</h1>
+		</div>
+	</div>
+{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}{% endblock %}

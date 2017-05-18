@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Departments{% endblock %}
+{% block navbar %}
+	<li><a href='/'>Home</a></li>
+	<li class="active"><a href="/department/departments/">Departments</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	{% if user.is_authenticated %}
+		<li><a href="/accounts/logout/">Logout</a></li>
+	{% else %}
+		<li><a href="/accounts/login/">Login</a></li>
+		<li><a href="/accounts/register_user/">Register</a></li>
+	{% endif %}
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block page_header %}
+	<div class="container-fluid">
+		<div class="page-header">
+			<h1 class="text-center">Departments</h1>
+		</div>
+	</div>
+{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}
+	<div class="container-fluid col-md-10 col-md-offset-1">
+		{% if departments.count > 0 %}
+			{% for department in departments %}
+				<div class="col-md-6">
+					<div class="panel panel-success" style="min-height:250px;">
+						<div class="row">
+						<div class="panel-heading">
+							<div class="col-md-4">
+								<img src="{% get_static_prefix %}{{department.get_thumbnail}}" class="thumnail" style="width:100%;height:100%">
+							</div>
+							<div class="col-md-7 col-md-offset-1">
+								<h2><a href="/department/departments/{{department.id}}/">{{ department.title|title }}</a></h2>
+							</div>
+						</div>
+						</div>
+						<div class="panel-body">
+							<p class="text-center text-info">{{ department.description|lower|truncatechars:50 }}</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% else %}
+			<h2>No departments to show</h2>
+		{% endif %}
+	</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ article.title|title }}{% endblock %}
+{% block navbar %}
+	<li><a href='/'>Home</a></li>
+	<li><a href="/department/departments/">Departments</a></li>
+	<li class="active"><a href='/department/departments/{{dept.id}}'>{{dept.title}}</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	{% if user.is_authenticated %}
+		<li><a href="/accounts/logout/">Logout</a></li>
+	{% else %}
+		<li><a href="/accounts/login/">Login</a></li>
+		<li><a href="/accounts/register_user/">Register</a></li>
+	{% endif %}
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}
+	<div class="container-fluid col-md-10 col-md-offset-1">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h2 class="text-default">{{ article.title|title }}</h2>
+				<p class="text-default"><a href="/department/departments/{{dept.id}}">{{dept.title}}</a> | {{article.pub_date}} | <a href="/profile/{{article.username}}/">{{article.username}}</a></p>
+			</div>
+			<div class="panel-body">
+				{% if article.thumbnail %}
+					<p><img src="{% get_static_prefix %}{{article.get_thumbnail}}" style="width:100%;height:100%;" class="thumbnail"/></p>
+				{% endif %}
+				<p class="text-left text-default lead">{{ article.body }}</p>
+			</div>
+			<div class="panel-footer">
+				<p>{{ article.likes }} people liked this article</p>
+				{% if user.is_authenticated %}
+				<form action="/department/departments/{{dept.id}}/{{article.id}}/like/">
+					<button type="submit" class="btn btn-default btn-sm" formaction="/department/departments/{{dept.id}}/{{article.id}}/like/">
+                	<span class="glyphicon glyphicon-thumbs-{{up_down}}"></span> {{label}}
+              		</button>
+              	</form>
+				{% else %}
+					<p class="text-muted">Sign in to like this post</p>
+				{% endif %}
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h2>Comments</h2>
+			</div>
+			<div class="panel-body">
+				{% for c in article.comment_set.all %}
+					<div class="panel panel-info">
+						<div class="panel-header">
+							<p class="text-center text-default bg-muted">{{c.name}} - <a href="/profile/{{c.username}}/">{{c.username}}</a></p>
+						</div>
+						<div class="panel-body">
+							<p class="text-default bg-muted">{{c.comment}}</p>
+						</div>
+						{% if user.username == c.username %}
+							<div class="panel-footer">
+								<form action="/department/departments/{{dept.id}}/{{article.id}}/{{c.id}}/deleteComment/">
+									<button type="submit" class="btn btn-danger btn-sm" formaction="/department/departments/{{dept.id}}/{{article.id}}/{{c.id}}/deleteComment/">
+										Delete
+									</button>
+								</form>
+							</div>
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="panel-footer">
+				{% if user.is_authenticated %}
+					<p><a href="/department/departments/{{dept.id}}/{{article.id}}/comment/" class="btn btn-primary">Add Comment</a></p>
+				{% else %}
+					<p class="text-muted">Sign in to post a comment</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

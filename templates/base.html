@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" contnet="Alansary">
+	<meta name="description" content="Test Project for Testing Bootstrap and Django Features">
+	<title>{% block title %}Home{% endblock %}</title>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{% static 'javascript/jquery-3.2.0.min.js' %}"></script>
+	<script src="{% static 'javascript/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/default.css' %}"> 
+    {% block stylesheet %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+	<!-- navbar-fixed-top -->
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">DeltaScienceMagazine</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+            		{% block navbar %}
+            			<li class="active"><a href="/">Home</a></li>
+			    		<li><a href="/department/departments/">Departments</a></li>
+			    		<li><a href="/latestnews/news/">Latest News</a></li>
+			    		<li><a href="/developer/">Developer</a></li>
+			    		{% if not user.is_authenticated %}
+	                		<li><a href="/accounts/login/">Login</a></li>
+	                		<li><a href="/accounts/register_user/">Register</a></li>
+                		{% else %}
+                			<li><a href="/accounts/logout/">Logout</a></li>
+                		{% endif %}
+                		<li><a href="/contact/">Contact</a></li>
+                	{% endblock %}
+                	{% block volume %}
+                		<li><a href="/volumes/volumes/">Volumes</a></li>
+                	{% endblock %}
+            	</ul>
+            	{% block authenticated_user_profile %}
+	            	{% if user.is_authenticated %}
+		            	<ul class="nav navbar-nav navbar-right">
+		            		<li><a href="/profile/{{user.username}}/">Profile</a></li>
+		            		<li><a href="#">Welcome, {{user.username}}</a></li>
+		            	</ul>
+	            	{% endif %}
+            	{% endblock %}
+<!-- 				<ul class="nav navbar-nav navbar-right">
+                	<li class="dropdown">
+                		<a class="dropdown-toggle" href="#" data-toggle="dropdown">Account <span class="caret"></span></a>
+                		<ul class="dropdown-menu">
+	                			<li><a href="/accounts/login/">Login</a></li>
+	                			<li><a href="/accounts/register_user/">Register</a></li>
+                			<li><a href="/accounts/logout/">Logout</a></li>
+                		</ul>
+                	</li>
+            	</ul> -->
+			</div>
+		</div>
+	</nav>
+	{% block message %}
+		{% if messages %}
+			{% for message in messages %}
+		        <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+		            <div class="alert alert-success">
+		                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+		                    ×</button>
+		               <span class="glyphicon glyphicon-ok"></span>
+		               <p class="text-center"><strong>{{ message }}</strong></p>
+		            </div>
+		        </div>
+	        {% endfor %}
+        {% endif %}
+	{% endblock %}
+	{% block page_header %}{% endblock %}
+	{% block corousel %}
+		<style>
+	    	.h3-active-styling span, .h4-active-styling span, .h3-non-active-styling span, .h4-non-active-styling span {
+				font: bold 24px/45px Helvetica, Sans-Serif; 
+				letter-spacing: -1px;  
+				background: rgb(0, 0, 0); /* fallback color */
+				background: rgba(0, 0, 0, 0.7);
+				padding: 10px;
+				font-size: 17px;
+				color: #fcfcfc;
+	    	}
+		</style>
+		<div class="container">
+			<div id="carousel1" class=" carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+					<li data-target="#carousel1" data-slide-to="0" class="0">
+						
+					</li>
+					{% for carousel in carousels %}
+					<li data-target="#carousel1" data-slide-to="{{carousel.id}}">
+
+					</li>
+					{% endfor %}
+				</ol>
+				<div class="carousel-inner" style="height:350px;">
+					{% for carousel in activeCarousel %}
+						<div class="item active">
+							<img src="{% get_static_prefix %}{{carousel.get_thumbnail}}" style="height:350px;width:100%">
+							<div class="carousel-caption">
+								<h3 class="h3-active-styling"><span>{{carousel.header}}</span></h3>
+								<h4 class="h4-active-styling"><span>{{carousel.body}}</span></h4>
+							</div>
+						</div>
+					{% endfor %}
+					{% for carousel in carousels %}
+						<div class="item">
+							<img src="{% get_static_prefix %}{{carousel.get_thumbnail}}" style="height:350px;width:100%">
+							<div class="carousel-caption">
+								<h3 class="h3-non-active-styling"><span>{{carousel.header}}</span></h3>
+								<h4 class="h4-non-active-styling"><span>{{carousel.body}}</span></h4>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<a href="#carousel1" class="left carousel-control" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				</a>
+				<a href="#carousel1" class="right carousel-control" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				</a>
+			</div>
+		</div>
+	{% endblock %}
+	{% block content %}
+		<div class="container-fluid col-md-10 col-md-offset-1">
+			<div class="container-fluid col-md-12">
+				<div class="page-header">
+					<h1 class="text-left">Most Popular Articles</h1>
+				</div>
+			</div>
+			{% if mostPopular.count > 0 %}
+				{% for a in mostPopular %}
+					<div class="container-fluid col-md-4">
+						<div class="panel panel-success">
+							<div class="panel-heading" style="min-height:120px;">
+								<div class="text-left">
+									<h4><a href="/department/departments/{{a.article.department.id}}/{{a.article.id}}/">{{ a.article.title|title }}</a></h4>
+									<p class="text-muted">{{a.article.pub_date}} | <a href="/profile/{{a.article.username}}/">{{a.article.username}}</a></p>
+								</div>
+							</div>
+							<div class="panel-body">
+								<div class="col-md-4">
+									<img src="{% get_static_prefix %}{{a.article.department.get_thumbnail}}" class="thumnail" style="width:100%;height:100%">
+								</div>
+								<div class="col-md-7 col-md-offset-1">
+									<p class="text-center text-muted">
+										{{ a.article.body|lower|truncatechars:40 }}
+										<div>
+											<form action="/department/departments/{{a.article.department.id}}/{{a.article.id}}/">
+												<button type="submit" class="btn btn-default btn-sm" formaction="/department/departments/{{a.article.department.id}}/{{a.article.id}}/">
+													Continue Reading &raquo;
+												</button>
+											</form>
+										</div>
+									</p>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<p>{{ a.article.likes }} people liked this article</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				<h2 class="text-center">No articles to show</h2>
+			{% endif %}
+		</div>
+		<div class="container-fluid col-md-10 col-md-offset-1">
+			<div class="container-fluid col-md-12">
+				<div class="page-header">
+					<h1 class="text-left">Latest News</h1>
+				</div>
+			</div>
+			{% if news.count > 0 %}
+				{% for a in news %}
+					<div class="container-fluid col-md-4">
+						<div class="panel panel-success" style="min-height:350px;">
+							<div class="panel-heading" style="min-height:120px">
+								<div class="text-left">
+									<h4><a href="/latestnews/{{a.id}}/">{{ a.title|title }}</a></h4>
+									<p class="text-muted">News | {{a.pub_date}}</p>
+								</div>
+							</div>
+							<div class="panel-body">
+								<div class="col-md-4">
+									<img src="{% get_static_prefix %}{{a.get_thumbnail}}" class="thumnail" style="width:100%;height:100%">
+								</div>
+								<div class="col-md-7 col-md-offset-1">
+									<p class="text-center text-muted">
+										{{ a.description|lower|truncatechars:110 }}
+										<div>
+											<form action="/latestnews/{{a.id}}/">
+												<button type="submit" class="btn btn-default btn-sm" formaction="/latestnews/{{a.id}}/">
+													Continue Reading &raquo;
+												</button>
+											</form>
+										</div>
+<!-- 										<a href="/latestnews/{{a.id}}/">
+											Read
+										</a> -->
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				<h2 class="text-center">No news to show</h2>
+			{% endif %}
+		</div>
+	{% endblock %}
+	{% block footer %}
+<!-- 		<div class="container-fluid col-md-12" style="background:#dff0d8;">
+			<ul class="nav navbar-nav nav-center">
+				<li>© 2017 Alansary. All rights reserved. </li>
+			</ul>
+		</div> -->
+	{% endblock %}
+</body>
+</html>

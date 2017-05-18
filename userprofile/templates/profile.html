@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{user.username}} Profile{% endblock %}
+{% block navbar %}
+	<li><a href='/'>Home</a></li>
+	<li><a href="/department/departments/">Departments</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	{% if currentUser.is_authenticated %}
+		<li><a href="/accounts/logout/">Logout</a></li>
+	{% else %}
+		<li><a href="/accounts/login/">Login</a></li>
+		<li><a href="/accounts/register_user/">Register</a></li>
+	{% endif %}
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block authenticated_user_profile %}
+	{% if currentUser.is_authenticated %}
+    	<ul class="nav navbar-nav navbar-right">
+    		{% if validity %}
+    			<li><a href="/profile/{{currentUser}}/edit/">Edit Profile</a></li>
+    			<li class="active"><a href="/profile/{{currentUser.username}}/">Profile</a></li>
+    		{% else %}
+    			<li><a href="/profile/{{currentUser.username}}/">Profile</a></li>
+    		{% endif %}
+    		<li><a href="#">Welcome, {{currentUser.username}}</a></li>
+    	</ul>
+	{% endif %}
+{% endblock %}
+{% block page_header %}{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}
+	<div class="row">
+	<div class="container-fluid col-md-10 col-md-offset-1">
+		<div class="page-header">
+			{% if notifications.count > 0 %}
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="text-center">Notifications</h2>
+					</div>
+					<div class="panel-body">
+						{% for n in notifications %}
+							<p><a href="/notification/show/{{n.id}}">{{n.title|title}}</a></p>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+			<h1 class="text-center">{{requiredUser|title}} Profile</h1>
+			{% if userinfo.count > 0 %}
+				{% for u in userinfo %}
+				<div class="panel panel-default">
+					<div class="panel-heading">
+							<h2>About</h2>
+					</div>
+					<div class="panel-body">
+						<div class="col-md-4">
+							<img src="{% get_static_prefix %}{{u.get_image}}" class="thumnail" style="width:100%;height:100%">
+						</div>
+						<div class="col-md-7 col-md-offset-1">
+							{% if u.first_name %}
+								<h4 class="text-left">First Name  : {{u.first_name}}</h4>
+							{% endif %}
+							{% if u.last_name %}
+								<h4 class="text-left">Last Namd   : {{u.last_name}}</h4>
+							{% endif %}
+							{% if u.phone_number %}
+								<h4 class="text-left">Phone Number: {{u.phone_number}}</h4>
+							{% endif %}
+							{% if u.about %}
+								<h4 class="text-center">Summary</h4>
+								<h4 class="text-left">{{u.about}}</h4>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	<div class="col-md-1"></div>
+	<style>
+		.panel-info .panel-heading {
+			background-color:#089de3;
+			color:#fff;
+		}
+		.list-group-item-success {
+			background-color: #f1f3f8;
+		}
+	</style>
+	{% if papers.count > 0 %}
+		<div class="col-md-10 col-md-offset-1">
+			<h3 class="text-center">Published Papers</h3>
+			<br/><hr/>
+		</div>
+	{% endif %}
+	<div class="container-fluid col-md-10 col-md-offset-1">
+		{% if papers.count > 0 %}
+			{% for paper in papers %}
+				<div class="col-md-9 panel panel-muted">
+					<h3 class="text-muted text-left bg-muted">Research Article</h3>
+					<hr />
+					<div class="col-md-12" style="line-height:25px;">
+						<div><a href="/volumes/volumes/{{paper.volume.year.id}}/{{paper.volume.id}}/{{paper.id}}/">{{paper.title}}</a></div>
+						{% if paper.user.all.count > 0 %}
+							<ul style="list-style: none;padding-left:0px;">
+								<li style="display: inline-block;"><p>Authors: </p></li>
+								{% for u in paper.user.all %}
+									<li style="display: inline-block;">
+										<a href="/profile/{{u.username}}/" style="padding: 5px 2px;">{{u.username}}</a>
+									</li>
+								{% endfor %}
+								{% if paper.author_set.all.count > 0 %}
+									{% for author in paper.author_set.all %}
+									<li style="display: inline-block;"><span>{{author.name}}</span></li>
+									{% endfor %}
+								{% endif %}
+							</ul>
+						{% endif %}
+						<h6 style="color: #5c5c5c;"><strong>Published </strong><span>{{paper.date.date}}</span></h6>
+						<form action="{% get_static_prefix %}{{paper.get_file}}">
+							<button type="submit" class="btn btn-primary btn-sm" formaction="{% get_static_prefix %}{{paper.get_file}}">
+								<span class="glyphicon glyphicon glyphicon-file"></span> View
+							</button>
+						</form>
+					</div>
+					{% if paper.highlight_set.all.count > 0 %}
+						<div class="col-md-12"><hr /></div>
+						<div class="col-md-1"></div>
+						<div class="container-fluid col-md-10" style="border: 1px solid #d2d2d2;">
+							<h4 style="color: #5c5c5c;"><strong>Highlights</strong></h4>
+							<ul style="padding-left:0px;line-height:30px;">
+								{% for highlight in paper.highlight_set.all %}
+									<li>• {{highlight}}</li>
+								{% endfor %}
+							</ul>
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-12"><hr /></div>
+					{% endif %}
+					<div class="col-md-1"></div>
+					<div class="container-fluid col-md-10">
+						<h4 style="color: #5c5c5c;"><strong>Abstract</strong></h4>
+						<p>{{paper.abstract}}</p>
+						<br />
+						<h4 style="color: #5c5c5c;"><strong>Keywords</strong></h4>
+						<p>{{paper.keywords}}</p>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+	{% if articles.count > 0 %}
+		<div class="col-md-10 col-md-offset-1">
+			<h3 class="text-center">Published Work</h3>
+			<br/><hr/>
+		</div>
+	{% endif %}
+	<div class="container-fluid col-md-10 col-md-offset-1">
+		{% if articles.count > 0 %}
+			{% for article in articles %}
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<div class="text-left">
+							<h2><a href="/department/departments/{{article.department.id}}/{{article.id}}/">{{ article.title|title }}</a></h2>
+							<p class="text-muted"><a href="/department/departments/{{article.department.id}}/">{{article.department.title}}</a> | {{article.pub_date}} | <a href="/profile/{{user.username}}/">{{article.username}}</a></p>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="col-md-4">
+							<img src="{% get_static_prefix %}{{article.department.get_thumbnail}}" class="thumnail" style="width:100%;height:100%">
+						</div>
+						<div class="col-md-7 col-md-offset-1">
+							<p class="text-center text-info">{{ article.body|lower|truncatewords:"100" }}</p>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<p>{{ article.likes }} people liked this article</p>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock %}
+{% block footer %}{% endblock %}

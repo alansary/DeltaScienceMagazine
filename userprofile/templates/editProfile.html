@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Edit Profile{% endblock %}
+{% block scripts %}
+	<!-- <script src="{% static 'scripts/angular.js' %}"></script> -->
+	<script src="{% static 'scripts/profile.js' %}"></script>
+	<!-- <script src="{% static 'components/profile.ctr.js' %}"></script> -->
+{% endblock %}
+{% block navbar %}
+	<li><a href='/'>Home</a></li>
+	<li><a href="/department/departments/">Departments</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	<li><a href="/accounts/logout/">Logout</a></li>
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block authenticated_user_profile %}
+	<ul class="nav navbar-nav navbar-right">
+		<li class="active"><a href="/profile/edit/{{user.username}}/">Edit Profile</a></li>
+		<li><a href="/profile/{{user.username}}/">Cancel</a></li>
+		<li><a href="#">Welcome, {{user.username}}</a></li>
+	</ul>
+{% endblock %}
+{% block page_header %}
+	<div class="container-fluid col-md-10 col-md-offset-1">
+		<div class="page-header">
+			<h1 class="text-left">{{user.username|title}} Profile</h1>
+		</div>
+	</div>
+{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}
+<!-- <div ng-app="ngProfile" ng-controller="profileCtr"> -->
+	<div class="col-md-10 col-md-offset-1">
+		<div class="row">
+			<div class="col-md-12 panel panel-default">
+				<div class="panel-heading">
+					<h2>Basic Information</h2>
+				</div>
+				<div class="panel-body">
+					{% for field in form %}
+						{{field.error}}
+					{% endfor %}
+					<form action='/profile/{{user.username}}/edit/' method='post' enctype="multipart/form-data">{% csrf_token %}
+						{{ form|crispy }}
+						<input type="submit" name="submit" value="Update" class="btn btn-primary">
+					</form>
+				</div>
+			</div>
+<!-- 			<div class="panel panel-default col-md-6" style="min-height:750px;">
+				<div class="panel-heading">
+						<h2>About</h2>
+				</div>
+				<div class="panel-body">
+					<div class="col-md-4">
+						{% for u in userinfo %}
+							<img src="/static/{{u.profile_image}}" class="thumnail" style="width:100%;height:100%">
+						{% endfor %}
+					</div>
+					<div class="col-md-7 col-md-offset-1">
+					{% verbatim %}
+						<h4 class="text-left">First Name  : {{ fname }}</h4>
+						<h4 class="text-left">Last Namd   : {{ lname }}</h4>
+						<h4 class="text-left">Phone Number: {{ phone }}</h4>
+						<h4 class="text-center">Summary</h4>
+						<h4 class="text-left">{{ about }}</h4>
+					{% endverbatim %}
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+<!-- </div> -->
+{% endblock %}
+{% block footer %}{% endblock %}

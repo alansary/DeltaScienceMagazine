@@ -1,0 +1,786 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Developers{% endblock %}
+{% block stylesheet %}
+	<link rel="stylesheet" href="{% static 'css/cv.css' %}">
+{% endblock %}
+{% block navbar %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/department/departments/">Departments</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li class="active"><a href="/developer/">Developer</a></li>
+	{% if not user.is_authenticated %}
+		<li><a href="/accounts/login/">Login</a></li>
+		<li><a href="/accounts/register_user/">Register</a></li>
+	{% else %}
+		<li><a href="/accounts/logout/">Logout</a></li>
+	{% endif %}
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block page_header %}{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}
+<div>
+	<div class="cv-container animated fadeIn ">
+		<div class="cv-content single-column">
+			<section data-bind="sections" id="profile" class="profile no-page-break">
+				<article class="vcard" data-bind="content">
+					<div class="logo">
+						<div class="css-crop bg-contain">
+						</div>
+					</div>
+					<img class="user-thumb photo visible" data-bind="thumb" src="{% static 'uploaded/developer_thumbnail/Alansary_cv.jpeg' %}">
+					<div class="fn user-title">
+						<h1 class="full-name" data-bind="full_name">
+							<span class="undefined needsclick" data-placeholder="Full Name" contenteditable="false">	Mohamed Alansary
+							</span>
+						</h1>
+					</div>
+					<h3 class="title" data-bind="headline">
+						<span class="undefined needsclick" data-placeholder="Headline / Current Title" contenteditable="false">
+							Software Engineer
+						</span>
+					</h3>
+					<ul class="user-contact">
+						<li class="adr locality" data-bind="location">
+							<span class="undefined needsclick" data-placeholder="Location" contenteditable="false">		Beheira - Egypt
+							</span>
+						</li>
+						<li class="phone" data-bind="phone">
+							<span class="undefined needsclick" data-placeholder="Phone" contenteditable="false">		+201207395400
+							</span>
+						</li>
+						<li class="email" data-bind="email">
+							<a href="mailto:mohamed_alansary@rocketmail.com">mohamed_alansary@rocketmail.com</a>
+						</li>
+						<li>
+							<a href="https://www.linkedin.com/in/csmohamedalansary/">
+								<img src="{% static 'icons/linkedin.png'%}" style="height:20px;width:20px;">
+								<span>Linkedin</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="user-links user-websites" data-bind="websites">
+					</ul>
+				</article>
+			</section>
+			<section data-bind="sections" id="summary" class="text_story no-page-break">
+				<header>
+					<h3 class="header-text empty" data-bind="label">
+						<span class="undefined needsclick" data-placeholder="Summary" contenteditable="false">
+							Summary
+						</span>
+					</h3>
+				</header>
+				<article data-bind="content">
+					<div id="react-tinymce-257385" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						<p>
+							<span>
+								A math major at the faculty of science, Tanta university, pursuing my 
+								bachelor degree at the 4th year, division of Computer Science, 
+								department of Mathematics.<br> Interested in Algorithms, Data 
+								Structures, Problem Solving and exploring Machine Learning. I am highly 
+								interested in all aspects of algorithms and complexity including the 
+								Machine Learning algorithms. I can learn the subject very fast and 
+								efficiently master the subject in a little period of time. I have 
+								passion for my work and acquiring new knowledge.<br>
+							</span>
+						</p>
+					</div>
+				</article>
+			</section>
+			<section data-bind="sections" id="positions" class="dated_story no-page-break">
+				<header>
+					<h3 class="header-text empty empty" data-bind="label">
+						<span class="undefined needsclick" data-placeholder="Work History" contenteditable="false">		Work History
+						</span>
+					</h3>
+				</header>
+				<article data-bind="contents">
+					<div class="article-headings">
+						<h6 class="date-range">
+							<span data-bind="start_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		2014
+								</span>
+							</span>
+							<span data-bind="end_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		2016
+								</span>
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<h4 data-bind="title">
+							<span class="undefined needsclick" data-placeholder="job title" contenteditable="false">	Backend Developer
+							</span>
+						</h4>
+						<div data-bind="organization_url" target="_blank" rel="nofollow">
+							<h5 data-bind="organization">
+								<span class="undefined needsclick" data-placeholder="organization" contenteditable="false">
+									CitySoft, Inc.
+								</span>
+							</h5>
+						</div>
+						<div id="react-tinymce-257386" class=" mce-content-body" spellcheck="true" placeholder="Description">
+							<p>
+								Python/Django developer and database Schema implementor using MySQL.
+							</p>
+						</div>
+					</div>
+				</article>
+			</section>
+			<section data-bind="sections" id="degrees" class="dated_story no-page-break">
+				<header>
+					<h3 class="header-text empty empty" data-bind="label">
+						<span class="undefined needsclick" data-placeholder="Education" contenteditable="false">		Education
+						</span>
+					</h3>
+				</header>
+				<article data-bind="contents">
+					<div class="article-headings">
+						<h6 class="date-range">
+							<span data-bind="start_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		2013
+								</span>
+							</span>
+							<span data-bind="end_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		2017
+								</span>
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<h4 data-bind="title">
+							<span class="undefined needsclick" data-placeholder="degree name" contenteditable="false">
+								Bachelor of Computer Science
+							</span>
+						</h4>
+						<div data-bind="organization_url" target="_blank" rel="nofollow">
+							<h5 data-bind="organization">
+								<span class="undefined needsclick" data-placeholder="school name" contenteditable="false">
+									Faculty of Science - Tanta university
+								</span>
+							</h5>
+						</div>
+						<div id="react-tinymce-257387" class=" mce-content-body" spellcheck="true" placeholder="Description">
+							<p>
+								<em>
+									Pursuing my bachelor degree at the 4th year.
+								</em>
+							</p>
+						</div>
+					</div>
+				</article>
+			</section>
+			<section data-bind="sections" id="dated_stories" class="dated_story">
+				<header>
+					<h3 class="header-text empty empty" data-bind="label">
+						<span class="undefined needsclick" data-placeholder="custom dated section" contenteditable="false">
+							Certificates and Courses
+						</span>
+					</h3>
+				</header>
+				<article data-bind="contents">
+					<div class="article-headings">
+						<h6 class="date-range">
+							<span data-bind="start_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		March 3, 2017
+								</span>
+							</span>
+							<span data-bind="end_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		April 18, 2017
+								</span>
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<h4 data-bind="title">
+							<span class="undefined needsclick" data-placeholder="Title" contenteditable="false">		<a href="https://www.coursera.org/account/accomplishments/certificate/WFTQCT43TURD">			Machine Learning: Regression
+								</a>
+							</span>
+						</h4>
+						<div data-bind="organization_url" target="_blank" rel="nofollow">
+							<h5 data-bind="organization">
+								<span class="undefined needsclick" data-placeholder="organization" contenteditable="false">
+									University of Washington - Coursera
+								</span>
+							</h5>
+						</div>
+						<div id="react-tinymce-257388" class=" mce-content-body" spellcheck="true" placeholder="Description">
+							<p>
+								Machine Learning: Regression<br/>
+								Grade Achieved: 100.0%<br/>
+								Completed by Mohamed Amr Alansary on April 18, 2017<br/>
+								6 weeks of study, 5-8 hours/week<br/>
+								Carlos Guestrin &amp; Emily Fox<br/>
+								University of Washington<br/>
+								Certificate earned on April 18, 2017
+ 							</p>
+ 						</div>
+ 					</div>
+ 				</article>
+				<article data-bind="contents">
+					<div class="article-headings">
+						<h6 class="date-range">
+							<span data-bind="start_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		January 25, 2017
+								</span>
+							</span>
+							<span data-bind="end_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		March 10, 2017
+								</span>
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<h4 data-bind="title">
+							<span class="undefined needsclick" data-placeholder="Title" contenteditable="false">		<a href="https://www.coursera.org/account/accomplishments/certificate/YGN8R2TGT8J8">			Machine Learning Foundations: A Case Study Approach
+								</a>
+							</span>
+						</h4>
+						<div data-bind="organization_url" target="_blank" rel="nofollow">
+							<h5 data-bind="organization">
+								<span class="undefined needsclick" data-placeholder="organization" contenteditable="false">
+									University of Washington - Coursera
+								</span>
+							</h5>
+						</div>
+						<div id="react-tinymce-257388" class=" mce-content-body" spellcheck="true" placeholder="Description">
+							<p>
+								Machine Learning Foundations: A Case Study Approach<br/>
+								Grade Achieved: 100.0%<br/>
+								Completed by Mohamed Amr Alansary on March 10, 2017<br/>
+								6 weeks of study, 5-8 hours/week<br/>
+								Carlos Guestrin &amp; Emily Fox<br/>
+								University of Washington<br/>
+								Certificate earned on March 10, 2017"
+ 							</p>
+ 						</div>
+ 					</div>
+ 				</article>
+				<article data-bind="contents">
+					<div class="article-headings">
+						<h6 class="date-range">
+							<span data-bind="start_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		16 August 2014
+								</span>
+							</span>
+							<span data-bind="end_date">
+								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		21 August 2014
+								</span>
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<h4 data-bind="title">
+							<span class="undefined needsclick" data-placeholder="Title" contenteditable="false">		<a href="https://drive.google.com/file/d/0B3BQ64XNh0sWMTUtQ2g4RzU3Tmc/view?usp=drive_web">
+									Scientific Research Basics and Human Resources Development
+								</a>
+							</span>
+						</h4>
+						<div data-bind="organization_url" target="_blank" rel="nofollow">
+							<h5 data-bind="organization">
+								<span class="undefined needsclick" data-placeholder="organization" contenteditable="false">
+									Zewail City Friends, Al-gharbya Team
+								</span>
+							</h5>
+						</div>
+						<div id="react-tinymce-257388" class=" mce-content-body" spellcheck="true" placeholder="Description">
+							<p>
+								Attended A 30-hour intensive course in "Scientific Research Basics and Human 
+								Resources Development" organized by zewail city friends, al-gharbya team
+ 								from 16 to 21 August 2014.
+ 							</p>
+ 						</div>
+ 					</div>
+ 				</article>
+ 				<article data-bind="contents">
+ 					<div class="article-headings">
+ 						<h6 class="date-range">
+ 							<span data-bind="start_date">
+ 								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		20 December 2016
+ 								</span>
+ 							</span>
+ 							<span data-bind="end_date">
+ 								<span class="undefined needsclick" data-placeholder="YYYY" contenteditable="false">		21 December 2016
+ 								</span>
+ 							</span>
+ 						</h6>
+ 					</div>
+ 					<div class="article-body">
+ 						<h4 data-bind="title">
+ 							<span class="undefined needsclick" data-placeholder="Title" contenteditable="false">		<a href="https://drive.google.com/file/d/0B3BQ64XNh0sWYWdQaGJlUlB6NGs/view?usp=sharing">
+ 									International Conference of Mathematics, Statistics &amp; Information Technology
+ 								</a>
+ 							</span>
+ 						</h4>
+ 						<div data-bind="organization_url" target="_blank" rel="nofollow">
+ 							<h5 data-bind="organization">
+ 								<span class="undefined needsclick" data-placeholder="organization" contenteditable="false">
+ 									Faculty of Science - Tanta University
+ 								</span>
+ 							</h5>
+ 						</div>
+ 						<div id="react-tinymce-257389" class=" mce-content-body" spellcheck="true" placeholder="Description">
+ 							<p>
+ 								Worked as an organizer in the International Conference of Mathematics, 
+								Statistics &amp; Information Technology that held in Tanta university 
+								from 20 to 22 December 2016.
+							</p>
+						</div>
+					</div>
+				</article>
+			</section>
+			<section data-bind="sections" id="strengths" class="strengths">
+				<header>
+					<h3 class="header-text empty" data-bind="label">
+						<span class="undefined needsclick" data-placeholder="Skills" contenteditable="false">
+							Skills
+						</span>
+					</h3>
+				</header>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">
+								C Programming
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:73%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257390" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Data Structures
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:74%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257391" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Algorithms
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:46%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257392" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Problem Solving
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:38%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257393" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Python Programming
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:77%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257394" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Django Framework
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:77%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257394" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Database Design and Implementation
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:80%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257395" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">
+								MySQL
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:88%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257396" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Relational Databases
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:86%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257397" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Object Relational Mappings
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:48%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257398" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Machine Learning
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:48%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257398" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Object Oriented Programming
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:79%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257399" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">
+								UNIX/Linux OS
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:50%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257400" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">
+								HTML
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:47%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257401" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">
+								CSS
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:49%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257402" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">
+								C++
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:41%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257403" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name">
+							<span class="undefined needsclick" data-placeholder="label" contenteditable="false">		Mathematics
+							</span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level" style="width:37%;">
+							</div>
+						</div>
+						<div id="react-tinymce-257404" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						</div>
+					</div>
+					<div class="clearfix">
+					</div>
+				</article>
+			</section>
+			<section data-bind="sections" id="text_story" class="text_story no-page-break">
+				<header>
+					<h3 class="header-text empty" data-bind="label">
+						<span class="undefined needsclick" data-placeholder="Text Section" contenteditable="false">		Language proficiency
+						</span>
+					</h3>
+				</header>
+				<article data-bind="content">
+					<div id="react-tinymce-257405" class=" mce-content-body" spellcheck="true" placeholder="Description">
+						<table>
+							<tbody>
+								<tr>
+									<td style="text-align: center;"><strong>Arabic</strong></td>
+									<td style="text-align: center;"><strong>native</strong></td>
+								</tr>
+								<tr>
+									<td style="text-align: center;"><strong>English</strong></td>
+									<td style="text-align: center;"><strong>expert, interpreting</strong></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</article>
+			</section>
+			<template id="profile">
+				<article class="vcard" data-bind="content">
+					<div class="logo">
+						<div class="css-crop bg-contain">
+						</div>
+					</div>
+					<img class="user-thumb photo" data-bind="thumb">
+					<div class="fn user-title">
+						<h1 class="full-name" data-bind="full_name">
+						</h1>
+					</div>
+					<h2 class="title" data-bind="headline">
+					</h2>
+					<ul class="user-contact">
+						<li class="adr locality" data-bind="location"></li>
+						<li class="phone" data-bind="phone"></li>
+						<li class="email" data-bind="email"></li>
+					</ul>
+					<ul class="user-links user-websites" data-bind="websites">
+					</ul>
+				</article>
+			</template>
+			<template id="dated_story">
+				<header>
+					<h3 class="header-text" data-bind="label"></h3>
+				</header>
+				<article data-bind="contents">
+					<div class="article-headings">
+						<h6 class="date-range">
+							<span data-bind="start_date"></span>
+							<span data-bind="end_date"></span>
+						</h6>
+					</div>
+					<div class="article-body">
+						<h4 data-bind="title"></h4>
+						<div data-bind="organization_url" target="_blank"rel="nofollow">
+							<h5 data-bind="organization"></h5>
+						</div>
+						<p data-bind="description"></p>
+					</div>
+				</article>
+			</template>
+			<template id="strengths">
+				<header>
+					<h3 class="header-text" data-bind="label"></h3>
+				</header>
+				<article class="competency" data-bind="contents">
+					<div class="article-headings">
+						<h6 data-bind="name"></h6>
+					</div>
+					<div class="article-body">
+						<div class="competency-bar">
+							<div class="competency-level" data-bind="level"></div>
+						</div>
+						<p data-bind="description"></p>
+					</div>
+					<div class="clearfix"></div>
+				</article>
+			</template>
+			<template id="portfolio">
+				<header>
+					<h3 class="header-text" data-bind="label"></h3>
+				</header>
+				<article class="portfolio" data-bind="content">
+					<div data-bind="description">
+						<p>PortfolioDescription</p>
+					</div>
+					<div class="row gallery">
+						<div class="asset col-sm-4" data-bind="assets">
+							<a class="asset-thumb" data-bind="file_url" target="_blank">
+								<div class="asset-overlay"></div>
+								<div class="css-crop bg-cover"></div>
+							</a>
+							<div target="_blank" rel="nofollow" data-bind="link_url">
+								<label class="text-center ellipsis" data-bind="title"></label>
+							</div>
+						</div>
+					</div>
+				</article>
+			</template>
+			<template id="text_story">
+				<header>
+					<h3 class="header-text" data-bind="label"></h3>
+				</header>
+				<article data-bind="content">
+					<p data-bind="description"></p>
+				</article>
+			</template>
+			<template id="chart">
+				<header>
+					<h3 class="header-text" data-bind="label"></h3>
+				</header>
+				<article class="chart" data-bind="content">
+					<div  class="article-headings">
+						<h4 data-bind="title"></h4>
+					</div>
+					<div class="article-body">
+						<p data-bind="description"></p>
+						<div class="chart-graph" data-bind="chart"></div>
+					</div>
+					<div class="clearfix"></div>
+				</article>
+			</template>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Create{% endblock %}
+{% block scripts %}
+	<!-- <script src="{% static 'scripts/angular.js' %}"></script> -->
+	<script src="{% static 'scripts/article.js' %}"></script>
+	<!-- <script src="{% static 'components/article.ctr.js' %}"></script> -->
+{% endblock %}
+{% block navbar %}
+	<li><a href='/'>Home</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	<li class="active"><a href="/department/departments/{{dept.id}}/create">Create</a></li>
+	<li><a href='/department/departments/{{dept.id}}/'>Cancel</a></li>
+	<li><a href="/accounts/logout/">Logout</a></li>
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block page_header %}
+	<div class="container-fluid col-md-10 col-md-offset-1">
+		<div class="page-header">
+			<h1 class="text-center">Create Article</h1>
+		</div>
+	</div>
+{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}
+<!-- <div ng-app="ngArticle" ng-controller="articleCtr"> -->
+	<div class="col-md-10 col-md-offset-1">
+		<div class="row">
+			<div class="col-md-12 panel panel-default">
+				<div class="panedl-heding">
+					<h2>Edit Article</h2>
+				</div>
+				<div class="panel-body">
+					<form action='/department/departments/{{dept.id}}/create/' method='post' enctype="multipart/form-data">{% csrf_token %}
+						<!-- {{ form.as_p }} -->
+						{{ form|crispy }}
+						<input type="submit" name="submit" value="Create" class="btn btn-primary">
+					</form>
+				</div>
+			</div>
+<!-- 			<div class="panel panel-success col-md-7" style="min-height:770px;">
+				<div class="panel-heading">
+					{% verbatim %}
+						<h2 class="text-muted">{{ title }}</h2>
+					{% endverbatim %}
+					<p class="text-muted"><a href="/department/departments/{{dept.id}}">{{dept.title}}</a> | {{currDate}} | <a href="/profile/{{article.username}}/">{{user.username}}</a></p>
+				</div>
+				<div class="panel-body">
+					<p><img src="/static/uploaded/article_thumbnail/default.jpg" style="width:100%;height:100%;" class="thumbnail"/></p>
+					{% verbatim %}
+						<div><p class="text-left text-info lead">{{ body }}</p></div>
+					{% endverbatim %}
+				</div>
+				<div class="panel-footer">
+					<p>0 people liked this article</p>
+					<form>
+						<button type="submit" class="btn btn-default btn-sm">
+	                	<span class="glyphicon glyphicon-thumbs-up"></span> {{label}}
+	              		</button>
+	              	</form>
+				</div>
+			</div> -->
+		</div>
+	</div>
+<!-- </div> -->
+{% endblock %}

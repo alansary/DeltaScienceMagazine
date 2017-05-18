@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{notification.title|title}}{% endblock %}
+{% block navbar %}
+	<li><a href='/'>Home</a></li>
+	<li class="active"><a href="/department/departments/">Departments</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	<li><a href="/accounts/logout/">Logout</a></li>
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block page_header %}
+	<div class="container-fluid">
+		<div class="page-header">
+			<h1 class="text-center">{{notification.title|title}}</h1>
+		</div>
+	</div>
+{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}
+	<div class="container-fluid col-md-10 col-md-offset-1">
+		<h3 class="text-default text-center">
+			{{notification.message}}
+		</h3>
+		<form action="/notification/delete/{{notification.id}}/">
+			<button type="submit" class="btn btn-danger btn-md" formaction="/notification/delete/{{notification.id}}/">
+				Mark as read
+			</button>
+		</form>
+	</div>
+{% endblock %}

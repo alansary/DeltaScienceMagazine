@@ -1,0 +1,32 @@
+li {
+	list-style: none;
+}
+
+.nav-center {
+	float: none;
+	display: table;
+	table-layout: fixed;
+	margin: 0 auto;
+}
+
+.nav-center li a:hover {
+	background: rgb(223, 240, 216);
+}
+
+/*.messages {
+	background-color: #c0c0c0;
+	color: #fff;
+	padding: 1em;
+}
+
+.success {
+	background-color: #008800;
+	border-color: #005500;
+	padding-left: 1em;
+}
+
+.deleted {
+	background-color: #880000;
+	border-color: #550000;
+	padding-left: 1em;
+}*/

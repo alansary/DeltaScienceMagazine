@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{paper.title|title}}{% endblock %}
+{% block navbar %}
+	<li><a href='/'>Home</a></li>
+	<li><a href="/department/departments/">Departments</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	{% if user.is_authenticated %}
+		<li><a href="/accounts/logout/">Logout</a></li>
+	{% else %}
+		<li><a href="/accounts/login/">Login</a></li>
+		<li><a href="/accounts/register_user/">Register</a></li>
+	{% endif %}
+	<li><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block page_header %}{% endblock %}
+{% block content %}
+<style>
+	.panel-info .panel-heading {
+		background-color:#089de3;
+		color:#fff;
+	}
+	.list-group-item-success {
+		background-color: #f1f3f8;
+	}
+</style>
+<div class="page-header">
+	<h1 class="text-center"></h1>
+</div>
+<div class="container-fluid">
+	<div class="panel panel-muted">
+		<div class="panel-head">
+			<div class="col-md-3"></div>
+			<div class="col-md-9">
+				<h4 class="text-muted">{{volume.title}} {{volume.number}} ({{volume.date.date}})</h4>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="col-md-3">
+				<div container-fluid>
+					<h3 class="text-center text-muted">Articles in Press</h3>
+					<hr />
+					<div class="panel-group panel-info">
+						{% for year in years %}
+							<div class="panel-heading">
+								<h class="panel-title">
+									<a href="#cal{{year.id}}" data-toggle="collapse">
+										volumes [{{ year.startDate.date.year }} - {{ year.endDate.date.year }}]
+									</a>
+								</h>
+							</div>
+							{% ifequal year.id|add:0 year_id|add:0 %}
+							<div class="panel-collapse collapse in" id="cal{{year.id}}">
+							{% else %}
+							<div class="panel-collapse collapse in" id="cal{{year.id}}">
+							{% endifequal %}
+								<ul class="list-group">
+									{% for volume in year.volume_set.all %}
+										{% ifequal volume.id|add:0 volume_id|add:0 %}
+										<li class="list-group-item list-group-item-success">
+										{% else %}
+										<li class="list-group-item">
+										{% endifequal %}
+											<a href="/volumes/volumes/{{year.id}}/{{volume.id}}/">{{volume.title}} {{volume.number}}</a>
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9 panel panel-muted">
+				<h3 class="text-muted text-left bg-muted">Research Article</h3>
+				<hr />
+				<div class="col-md-12" style="line-height:25px;">
+					<div><a href="/volumes/volumes/{{year_id}}/{{volume_id}}/{{paper.id}}/">{{paper.title}}</a></div>
+					{% if paper.user.all.count > 0 %}
+						<ul style="list-style: none;padding-left:0px;">
+							<li style="display: inline-block;"><p>Authors: </p></li>
+							{% for u in paper.user.all %}
+								<li style="display: inline-block;">
+									<a href="/profile/{{u.username}}/" style="padding: 5px 2px;">{{u.username}}</a>
+								</li>
+							{% endfor %}
+							{% if paper.author_set.all.count > 0 %}
+								{% for author in paper.author_set.all %}
+								<li style="display: inline-block;"><span>{{author.name}}</span></li>
+								{% endfor %}
+							{% endif %}
+						</ul>
+					{% endif %}
+					<h6 style="color: #5c5c5c;"><strong>Published </strong><span>{{paper.date.date}}</span></h6>
+					<form action="{% get_static_prefix %}{{paper.get_file}}">
+						<button type="submit" class="btn btn-primary btn-sm" formaction="{% get_static_prefix %}{{paper.get_file}}">
+							<span class="glyphicon glyphicon glyphicon-file"></span> View
+						</button>
+					</form>
+				</div>
+				{% if paper.highlight_set.all.count > 0 %}
+					<div class="col-md-12"><hr /></div>
+					<div class="col-md-1"></div>
+					<div class="container-fluid col-md-10" style="border: 1px solid #d2d2d2;">
+						<h4 style="color: #5c5c5c;"><strong>Highlights</strong></h4>
+						<ul style="padding-left:0px;line-height:30px;">
+							{% for highlight in paper.highlight_set.all %}
+								<li>• {{highlight}}</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-12"><hr /></div>
+				{% endif %}
+				<div class="col-md-1"></div>
+				<div class="container-fluid col-md-10">
+					<h4 style="color: #5c5c5c;"><strong>Abstract</strong></h4>
+					<p>{{paper.abstract}}</p>
+					<br />
+					<h4 style="color: #5c5c5c;"><strong>Keywords</strong></h4>
+					<p>{{paper.keywords}}</p>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

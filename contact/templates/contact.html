@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Contact{% endblock %}
+{% block navbar %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/department/departments/">Departments</a></li>
+	<li><a href="/latestnews/news/">Latest News</a></li>
+	<li><a href="/developer/">Developer</a></li>
+	{% if user.is_authenticated %}
+		<li><a href="/accounts/logout/">Logout</a></li>
+	{% else %}
+		<li><a href="/accounts/login">Login</a></li>
+		<li><a href="/accounts/register_user">Register</a></li>
+	{% endif %}
+	<li class="active"><a href="/contact/">Contact</a></li>
+{% endblock %}
+{% block page_header %}
+	<div class="container-fluid">
+		<div class="page-header">
+			<h1 class="text-center">Contact</h1>
+		</div>
+	</div>
+{% endblock %}
+{% block corousel %}{% endblock %}
+{% block content %}
+	<div class='row'>
+		<div class='col-md-6 col-md-offset-3'>
+			<h1> {{ title }} </h1>
+			{% if confirm_message %}
+				<p> {{ confirm_message }} </p>
+			{% endif %}
+			{% if form %}
+				<form method='POST' action=''> {% csrf_token %}
+					{{ form|crispy }}
+					<input type="submit" value="Submit" class='btn btn-success'/>
+				</form>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
+{% block footer %}{% endblock %}

@@ -1,0 +1,1 @@
+web: gunicorn deltasciencemagazine.wsgi --pythonpath deltasciencemagazine --log-file -
