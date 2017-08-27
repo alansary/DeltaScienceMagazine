@@ -1,6 +1,6 @@
 # Delta Science Magazine
   - Delta Science Magazine is the formal science magazine for delta in Egypt. This project is a capstone project of me in the faculty of science, Tanta university.
-  - Note: Don't ever use this project in production because the SECRET_KEY is committed with the code and mainly the hole project is for testing purposes and interacting with Django framework. If you want to use it in production, then create a new project and run the MigrationScript.sh script then copy the entire code in the new project.
+  - Note: Don't ever use this project in production because the SECRET_KEY is committed with the code and mainly the hole project is for testing purposes and interacting with Django framework. If you want to use it in production, then create a new project and run the MigrationScript.sh script then copy the required code in the new project.
 ## Installation
   - sudo apt-get install python-setuptools
   - easy_install virtualenv
